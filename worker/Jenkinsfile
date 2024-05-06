@@ -16,7 +16,7 @@ pipeline {
         }
         stage("test"){
             steps{
-                echo Running Unit Tests on worker app'
+                echo 'Running Unit Tests on worker app'
             }
         }
         stage("package"){
