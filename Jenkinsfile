@@ -1,34 +1,34 @@
 pipeline {
     agent any 
 
+    tools{
+        maven 'maven 3.6.1'
+    }
+
     stages{
-        stage("one"){
+        stage("build"){
             steps{
-                echo 'step 1'
-                sleep 3
+                echo 'Compiling worker app'
+                dir('worker'){
+                    sh 'mvn compile'
+                }
             }
         }
-        stage("two"){
-            when{
-                branch 'master'
-                changeset "**/worker/**"
-            }
+        stage("test"){
             steps{
-                echo 'step 2'
-                sleep 9
+                echo Running Unit Tests on worker app'
             }
         }
-        stage("three"){
+        stage("package"){
             steps{
-                echo 'step 3'
-                sleep 5
+                echo 'Packaging worker app'
             }
         }
-    } 
+    }
 
     post{
       always{
-          echo 'This pipeline is completed.'
+          echo 'Building multibranch pipeline for worker is completed..'
       }
     }
 }
