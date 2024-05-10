@@ -1,10 +1,5 @@
 pipeline {
     agent any 
-/*
-    tools{
-        maven 'maven 3.6.1'
-    }
-*/
 
     stages{
         stage("build"){
@@ -29,22 +24,6 @@ pipeline {
                     sh 'npm test'
                 }
             }
-        }
-
-/*
-        stage("package"){
-            when{
-                branch 'master'
-                changeset "**/result/**"
-            }
-            steps{
-                echo 'Packaging result app'
-                dir('worker'){
-                    sh 'mvn package -DskipTests'
-                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-                }
-            }
-*/
         }
     }
 
